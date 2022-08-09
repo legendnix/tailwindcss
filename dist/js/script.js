@@ -34,26 +34,71 @@ window.addEventListener("click", (e) => {
 
 //Darkmode Toggle
 
-const darkToggle = document.querySelector("#dark-toggle");
-const html = document.querySelector("html");
+var themeToggleDarkIcon = document.getElementById("tom2");
+var themeToggleLightIcon = document.getElementById("tom3");
 
-darkToggle.addEventListener("click", function () {
-  if (darkToggle.checked) {
-    html.classList.add("dark");
-    localStorage.theme = "dark";
+// Change the icons inside the button based on previous settings
+if (
+  localStorage.getItem("color-theme") === "dark" ||
+  (!("color-theme" in localStorage) &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches)
+) {
+  themeToggleLightIcon.classList.remove("hidden");
+} else {
+  themeToggleDarkIcon.classList.remove("hidden");
+}
+
+var themeToggleBtn = document.getElementById("tom");
+
+themeToggleBtn.addEventListener("click", function () {
+  // toggle icons inside button
+  themeToggleDarkIcon.classList.toggle("hidden");
+  themeToggleLightIcon.classList.toggle("hidden");
+
+  // if set via local storage previously
+  if (localStorage.getItem("color-theme")) {
+    if (localStorage.getItem("color-theme") === "light") {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("color-theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("color-theme", "light");
+    }
+
+    // if NOT set via local storage previously
   } else {
-    html.classList.remove("dark");
-    localStorage.theme = "light";
+    if (document.documentElement.classList.contains("dark")) {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("color-theme", "light");
+    } else {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("color-theme", "dark");
+    }
   }
 });
 
-//pindah toogle sesuai mode
-if (
-  localStorage.theme === "dark" ||
-  (!("theme" in localStorage) &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches)
-) {
-  darkToggle.checked = "true ";
-} else {
-  darkToggle.checked = "false";
+// back to top
+
+var toTopButton = document.getElementById("to-top-button");
+
+// When the user scrolls down 200px from the top of the document, show the button
+window.onscroll = function () {
+  if (
+    document.body.scrollTop > 200 ||
+    document.documentElement.scrollTop > 200
+  ) {
+    toTopButton.classList.remove("hidden");
+  } else {
+    toTopButton.classList.add("hidden");
+  }
+};
+
+// When the user clicks on the button, scroll to the top of the document
+function goToTop() {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }
+$(function () {
+  $('#nav-menu a[href~="' + location.href + '"]')
+    .parents("li")
+    .addClass("active");
+});
