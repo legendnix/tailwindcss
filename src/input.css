@@ -23,8 +23,3 @@ body {
 .hamburger-active > span:nth-child(3) {
   @apply -rotate-45;
 }
-
-//active menu
-.nav-menu li.active a {
-  background-color: primary;
-}

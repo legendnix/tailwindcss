@@ -97,8 +97,3 @@ window.onscroll = function () {
 function goToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
-$(function () {
-  $('#nav-menu a[href~="' + location.href + '"]')
-    .parents("li")
-    .addClass("active");
-});
