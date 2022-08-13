@@ -97,3 +97,12 @@ window.onscroll = function () {
 function goToTop() {
   window.scrollTo({ top: 0, behavior: "smooth" });
 }
+//active link
+
+// const activePage = window.location.pathname;
+// const navLinks = document.querySelectorAll("nav a").forEach((link) => {
+//   if (link.href.includes("${activePage}")) {
+//     link.classList.add("active");
+//   }
+// });
+//drop menu navbar
