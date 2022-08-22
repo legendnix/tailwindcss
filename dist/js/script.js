@@ -78,31 +78,29 @@ themeToggleBtn.addEventListener("click", function () {
 });
 
 // back to top
+let mybutton = document.getElementById("btn-back-to-top");
 
-var toTopButton = document.getElementById("to-top-button");
-
-// When the user scrolls down 200px from the top of the document, show the button
+// When the user scrolls down 20px from the top of the document, show the button
 window.onscroll = function () {
-  if (
-    document.body.scrollTop > 200 ||
-    document.documentElement.scrollTop > 200
-  ) {
-    toTopButton.classList.remove("hidden");
-  } else {
-    toTopButton.classList.add("hidden");
-  }
+  scrollFunction();
 };
 
-// When the user clicks on the button, scroll to the top of the document
-function goToTop() {
-  window.scrollTo({ top: 0, behavior: "smooth" });
+function scrollFunction() {
+  if (
+    document.body.scrollTop > 2000 ||
+    document.documentElement.scrollTop > 100
+  ) {
+    mybutton.style.display = "block";
+  } else {
+    mybutton.style.display = "none";
+  }
 }
-//active link
+// When the user clicks on the button, scroll to the top of the document
+mybutton.addEventListener("click", backToTop);
 
-// const activePage = window.location.pathname;
-// const navLinks = document.querySelectorAll("nav a").forEach((link) => {
-//   if (link.href.includes("${activePage}")) {
-//     link.classList.add("active");
-//   }
-// });
-//drop menu navbar
+function backToTop() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+
+//===== Section Menu Active
